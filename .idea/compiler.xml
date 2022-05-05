@@ -10,5 +10,8 @@
         <module name="JJava2" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Server" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
