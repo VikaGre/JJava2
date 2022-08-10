@@ -26,7 +26,6 @@ public class AuthController  {
 
     public ReadMessageListener readMessageListener;
 
-
     @FXML
     public void executeAuth() {
         String login = loginField.getText();
@@ -53,22 +52,15 @@ public class AuthController  {
         readMessageListener = getNetwork().addReadMessageListener(new ReadMessageListener() {
             @Override
             public void processReceivedCommand(Command command) {
-                if(command.getType() == CommandType.AUTH_OK) {
+                if (command.getType() == CommandType.AUTH_OK) {
                     AuthOkCommandData data = (AuthOkCommandData) command.getData();
                     String userName = data.getUserName();
-
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            ClientChat.getInstance().switchToMainChatWindow(userName);
-                        }
+                    Platform.runLater(() -> {
+                        ClientChat.getInstance().switchToMainChatWindow(userName);
                     });
                 } else {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            Dialogs.AuthError.INVALID_CREDENTIALS.show();
-                        }
+                    Platform.runLater(() -> {
+                        Dialogs.AuthError.INVALID_CREDENTIALS.show();
                     });
                 }
             }

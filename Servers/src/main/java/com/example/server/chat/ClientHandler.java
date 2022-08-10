@@ -6,12 +6,11 @@ import com.example.commands.commands.AuthCommandData;
 import com.example.commands.commands.PrivateMessageCommandData;
 import com.example.commands.commands.PublicMessageCommandData;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler {
+
     private MyServer server;
     private final Socket clientSocket;
     private ObjectInputStream inputStream;
@@ -20,10 +19,6 @@ public class ClientHandler {
 
     public ClientHandler(MyServer server, Socket clientSocket) {
         this.server = server;
-        this.clientSocket = clientSocket;
-    }
-
-    public ClientHandler(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 

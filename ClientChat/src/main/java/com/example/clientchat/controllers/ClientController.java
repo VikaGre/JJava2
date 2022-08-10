@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class ClientController {
@@ -50,14 +51,17 @@ public class ClientController {
         try {
             if (sender != null) {
                 Network.getInstance().sendPrivateMessage(sender, message);
-            } else  {
+            } else {
                 Network.getInstance().sendMessage(message);
             }
+
         } catch (IOException e) {
             Dialogs.NetworkError.SEND_MESSAGE.show();
         }
 
-        appendMessageToChat("Me", message);
+        appendMessageToChat("Я", message);
+        requestFocusForTextArea();
+        messageTextArea.clear();
     }
 
     public void appendMessageToChat(String sender, String message) {
@@ -72,11 +76,10 @@ public class ClientController {
         chatTextArea.appendText(message);
         chatTextArea.appendText(System.lineSeparator());
         chatTextArea.appendText(System.lineSeparator());
-        requestFocusForTextArea();
-        messageTextArea.clear();
+
     }
 
-    public void requestFocusForTextArea() {
+    private void requestFocusForTextArea() {
         Platform.runLater(() -> messageTextArea.requestFocus());
     }
 
@@ -93,6 +96,7 @@ public class ClientController {
                         userList.setItems(FXCollections.observableArrayList(data.getUsers()));
                     });
                 }
+
             }
         });
     }
