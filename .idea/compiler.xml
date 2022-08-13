@@ -7,8 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ClientChat" />
-        <module name="JJava2" />
+        <module name="Servers" />
+        <module name="Command" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Server" target="11" />
+      <module name="Server0" target="11" />
+      <module name="untitled" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,15 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientchat.ClientController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientchat.controllers.ClientController">
    <top>
       <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Online Chat" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
       <HBox prefHeight="25.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="messageField" onAction="#appendMessageToChat" prefHeight="26.0" prefWidth="509.0" />
-            <Button fx:id="sendMessageButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#appendMessageToChat" prefHeight="26.0" prefWidth="72.0" text="Send">
+            <TextField fx:id="messageTextArea" onAction="#sendMessage" prefHeight="26.0" prefWidth="509.0" />
+            <Button fx:id="sendMessageButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#sendMessage" prefHeight="26.0" prefWidth="72.0" text="Send">
                <HBox.margin>
                   <Insets left="20.0" right="5.0" />
                </HBox.margin>
@@ -25,7 +25,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TextArea fx:id="messageTextArea" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 2px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextArea fx:id="chatTextArea" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 2px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
