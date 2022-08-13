@@ -3,6 +3,7 @@ package com.example.server.chat.auth;
 import java.util.Objects;
 
 public class User {
+
     private final String login;
     private final String password;
     private final String username;

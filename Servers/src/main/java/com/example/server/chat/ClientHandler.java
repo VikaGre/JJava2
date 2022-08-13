@@ -8,6 +8,7 @@ import com.example.commands.commands.PublicMessageCommandData;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class ClientHandler {
 
@@ -29,7 +30,7 @@ public class ClientHandler {
             try {
                 authenticate();
                 readMessages();
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 System.err.println("Failed to process message from client");
                 e.printStackTrace();
             } finally {
@@ -42,7 +43,7 @@ public class ClientHandler {
         }).start();
     }
 
-    private void authenticate() throws IOException {
+    private void authenticate() throws IOException, SQLException {
         while (true) {
             Command command = readCommand();
 
