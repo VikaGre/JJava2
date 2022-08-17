@@ -6,14 +6,11 @@ public class AuthService {
 
     private static Connection connection;
     private static Statement stmt;
-    public void connectToDB() {
-        try {
-            connect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            disconnect();
-        }
+
+    public void connectToDB() throws SQLException, ClassNotFoundException {
+
+        connect();
+        disconnect();
     }
     /*private static Set<User> USERS = Set.of(
             new User("login1", "pass1", "username1"),
@@ -32,12 +29,14 @@ public class AuthService {
         return null;
     }*/
 
-    public static void connect() throws SQLException {
+    public static boolean connect() throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/db/ChatLoginAndPassword.db");
         stmt = connection.createStatement();
+        return true;
     }
 
-        public static void disconnect() {
+        public static boolean disconnect() {
         try {
             if (stmt != null) {
                 stmt.close();
@@ -52,6 +51,7 @@ public class AuthService {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public static String getUsernameByLoginAndPassword (String login, String password) throws SQLException {

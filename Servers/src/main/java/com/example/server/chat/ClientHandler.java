@@ -5,6 +5,8 @@ import com.example.commands.CommandType;
 import com.example.commands.commands.AuthCommandData;
 import com.example.commands.commands.PrivateMessageCommandData;
 import com.example.commands.commands.PublicMessageCommandData;
+import com.example.server.chat.auth.AuthService;
+import com.example.server.chat.auth.DataBase;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,7 +32,7 @@ public class ClientHandler {
             try {
                 authenticate();
                 readMessages();
-            } catch (IOException | SQLException e) {
+            } catch (IOException | SQLException | ClassNotFoundException e) {
                 System.err.println("Failed to process message from client");
                 e.printStackTrace();
             } finally {
@@ -43,7 +45,7 @@ public class ClientHandler {
         }).start();
     }
 
-    private void authenticate() throws IOException, SQLException {
+    private void authenticate() throws IOException, SQLException, ClassNotFoundException {
         while (true) {
             Command command = readCommand();
 
@@ -53,9 +55,10 @@ public class ClientHandler {
 
             if (command.getType() == CommandType.AUTH) {
                 AuthCommandData data = (AuthCommandData) command.getData();
+
                 String login = data.getLogin();
                 String password = data.getPassword();
-                String userName = this.server.getAuthService().getUsernameByLoginAndPassword(login, password);
+                String userName = DataBase.checkPass(login, password);
                 if (userName == null) {
                     sendCommand(Command.errorCommand("Некорректные имя пользователя или пароль"));
                 } else if (server.isUserNameBusy(userName)) {

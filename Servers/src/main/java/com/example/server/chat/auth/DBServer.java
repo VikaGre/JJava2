@@ -6,17 +6,21 @@ public class DBServer {
     private static Connection connection;
     private static Statement stmt;
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        readEx();
+        connect();
+        disconnect();
 
-        try {
+        /*try {
             connect();
+            readEx();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             disconnect();
-        }
+        }*/
+
+
         try {
             if (stmt != null) {
                 stmt.close();
@@ -24,6 +28,8 @@ public class DBServer {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
 
     }
@@ -36,8 +42,9 @@ public class DBServer {
         }
     }
 
-    public static void connect() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/db/ChatLoginAndPassword.db");
+    public static void connect() throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:Servers/src/main/resources/db/ChatLoginAndPassword.db");
         stmt = connection.createStatement();
     }
 

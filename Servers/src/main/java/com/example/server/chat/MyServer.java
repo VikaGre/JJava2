@@ -6,6 +6,7 @@ import com.example.server.chat.auth.AuthService;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;;
 import java.util.List;
 ;
@@ -85,4 +86,14 @@ public class MyServer {
     public AuthService getAuthService() {
         return authService;
     }
+
+    public boolean isConnectedToBD() throws SQLException, ClassNotFoundException {
+        return AuthService.connect();
+    }
+
+    public boolean isDisconnectedToBD() throws SQLException, ClassNotFoundException {
+        return AuthService.disconnect();
+    }
+
+
 }

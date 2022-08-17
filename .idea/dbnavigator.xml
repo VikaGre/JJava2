@@ -28,15 +28,15 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="5feea507-4f70-4fa9-8fca-2aa383bb9eab">
-      <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
+    <connection id="4de0be79-73e1-495c-8f72-b0751f923916">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="5feea507-4f70-4fa9-8fca-2aa383bb9eab" />
+    <connection id="4de0be79-73e1-495c-8f72-b0751f923916" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -45,7 +45,7 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db/ChatLoginAndPassword.db" connection-id="09a82a0b-c7b4-4a76-86ad-ab675425ccf9" session-id="MAIN" current-schema="main" />
+    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db/ChatLoginAndPassword.db" connection-id="4de0be79-73e1-495c-8f72-b0751f923916" session-id="MAIN" current-schema="main" />
     <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db" connection-id="ef40374b-f9ab-4a6d-a108-ce0181c94330" session-id="MAIN" current-schema="" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
@@ -73,9 +73,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="5feea507-4f70-4fa9-8fca-2aa383bb9eab" active="true" signed="true">
+      <connection id="4de0be79-73e1-495c-8f72-b0751f923916" active="true" signed="true">
         <database>
-          <name value="Connection 1" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -88,7 +88,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\Users\vikag\IdeaProjects\JJava2\src\main\resources\db\ChatLoginAndPassword.db" schema="main" />
+            <file path="C:\Users\vikag\IdeaProjects\JJava2\Servers\src\main\resources\db\ChatLoginAndPassword.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
