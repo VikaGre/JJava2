@@ -1,27 +1,107 @@
 package com.example.clientchat;
 
+import com.example.clientchat.controllers.AuthController;
+import com.example.clientchat.controllers.ClientController;
+import com.example.clientchat.model.AuthTimeout;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Timer;
 
 public class ClientChat extends Application {
+
+    private static ClientChat INSTANCE;
+
+    private Stage chatStage;
+    private Stage authStage;
+
+    private FXMLLoader chatWindowLoader;
+    private FXMLLoader authLoader;
+
+    private Timer mTimer;
+    private AuthTimeout mMyTimerTask;
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientChat.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Online Chat");
-        stage.setScene(scene);
+    public void start(Stage primaryStage) throws IOException {
+        this.chatStage = primaryStage;
 
-        ClientController controller = fxmlLoader.getController();
-        controller.userList.getItems().addAll("user1", "user2");
+        initViews();
+        getAuthStage().show();
+        getAuthController().initializeMessageHandler();
+    }
 
-        stage.show();
+    private void initViews() throws IOException {
+        initChatWindow();
+        initAuthDialog();
+    }
+
+    private void initChatWindow() throws IOException {
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+        mTimer = new Timer(true);
+        mMyTimerTask = new AuthTimeout();
+        chatWindowLoader = new FXMLLoader();
+        chatWindowLoader.setLocation(ClientChat.class.getResource("hello-view.fxml"));
+
+        Parent root = chatWindowLoader.load();
+        chatStage.setScene(new Scene(root));
+        getChatController().initializeMessageHandler();
+        mTimer.schedule(mMyTimerTask, 0);
+    }
+
+    private void initAuthDialog() throws IOException {
+        authLoader = new FXMLLoader();
+        authLoader.setLocation(ClientChat.class.getResource("authDialog.fxml"));
+        AnchorPane authDialogPanel = authLoader.load();
+
+        authStage = new Stage();
+        authStage.initOwner(chatStage);
+        authStage.initModality(Modality.WINDOW_MODAL);
+        authStage.setScene(new Scene(authDialogPanel));
+    }
+
+    public void switchToMainChatWindow(String userName) {
+        getChatStage().setTitle(userName);
+        getAuthController().close();
+        getAuthStage().close();
+        getChatStage().show();
+    }
+
+    @Override
+    public void init() {
+        INSTANCE = this;
     }
 
     public static void main(String[] args) {
         launch();
     }
+
+    public Stage getAuthStage() {
+        return authStage;
+    }
+
+    public Stage getChatStage() {
+        return chatStage;
+    }
+
+    public ClientController getChatController() {
+        return chatWindowLoader.getController();
+    }
+
+    public AuthController getAuthController() {
+        return authLoader.getController();
+    }
+
+    public static ClientChat getInstance() {
+        return INSTANCE;
+    }
+
+
 }
